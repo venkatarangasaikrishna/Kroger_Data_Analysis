@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, URL
+from sqlalchemy import create_engine
 
 # ─── Load environment variables ────────────────────────────────────────────────
 env_path = Path(__file__).parent / ".env"
@@ -14,16 +14,16 @@ DB_PASS   = os.getenv("DB_PASS")
 
 DRIVER    = "ODBC Driver 17 for SQL Server"
 
-# ─── SQLAlchemy engine for pandas & plotting ─────────────────────────────────
-connection_url = URL.create(
-    "mssql+pyodbc",
-    username=DB_USER,
-    password=DB_PASS,
-    host=DB_SERVER,
-    port=1433,
-    database=DB_NAME,
-    query={"driver": DRIVER}
+# ─── Build the SQLAlchemy connection URL manually ──────────────────────────────
+# mssql+pyodbc://<user>:<pass>@<server>:<port>/<db>?driver=<driver>
+driver_str = DRIVER.replace(" ", "+")  # spaces → pluses for URL
+connection_url = (
+    f"mssql+pyodbc://{DB_USER}:{DB_PASS}"
+    f"@{DB_SERVER}:1433/{DB_NAME}"
+    f"?driver={driver_str}"
 )
+
+# ─── SQLAlchemy engine for pandas & plotting ─────────────────────────────────
 ENGINE = create_engine(connection_url, fast_executemany=True)
 
 # ─── Raw DBAPI connection string for pyodbc ──────────────────────────────────
