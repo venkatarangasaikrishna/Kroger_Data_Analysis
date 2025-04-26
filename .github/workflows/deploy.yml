@@ -2,12 +2,12 @@ name: Build and Deploy Flask App to Azure
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -30,6 +30,7 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: nobelyashapp
+          app-name: yashnobelgroup
           slot-name: production
           package: .
+          clean: true
