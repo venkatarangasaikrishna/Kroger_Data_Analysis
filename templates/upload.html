@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Upload Data{% endblock %}
+{% block content %}
+<div class="container mt-5" style="max-width: 500px;">
+  <h3 class="text-center mb-4">Upload Retail CSVs</h3>
+  <form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label>Households CSV</label>
+      <input type="file" name="400_households" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label>Transactions CSV</label>
+      <input type="file" name="400_transactions" class="form-control" required>
+    </div>
+    <div class="mb-4">
+      <label>Products CSV</label>
+      <input type="file" name="400_products" class="form-control" required>
+    </div>
+    <button class="btn btn-primary w-100">Upload</button>
+    {% if msg %}
+      <div class="text-center mt-3 text-success fw-bold">{{ msg }}</div>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}

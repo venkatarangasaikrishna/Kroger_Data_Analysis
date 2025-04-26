@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: #F2F2F2;
+    font-family: "Segoe UI", sans-serif;
+  }
+  .profile-header {
+    text-align: center;
+    padding: 4rem 1rem 2rem 1rem;
+  }
+  .profile-header h1 {
+    font-size: 2.8rem;
+    color: #2E4053;
+    margin-bottom: 0.5rem;
+  }
+  .profile-header p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  .action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding-bottom: 4rem;
+    margin-top: 1rem;
+  }
+  .action-buttons .btn {
+    background-color: #D39B25;
+    border: none;
+    padding: .75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: .375rem;
+    min-width: 180px;
+    text-align: center;
+    transition: background-color .2s;
+  }
+  .action-buttons .btn:hover {
+    background-color: #B07A1D;
+  }
+</style>
+
+<div class="profile-header">
+  <h1>Welcome, {{ username }}!</h1>
+  <p>Start exploring your retail data insights.</p>
+</div>
+
+<div class="action-buttons container">
+  <a href="{{ url_for('dashboard') }}" class="btn">Dashboard</a>
+  <a href="{{ url_for('search') }}" class="btn">Search Data</a>
+  <a href="{{ url_for('upload') }}" class="btn">Upload Data</a>
+  <a href="{{ url_for('analysis_basket') }}" class="btn">Basket Analysis</a>
+  <a href="{{ url_for('analysis_churn') }}" class="btn">Churn Prediction</a>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Basket Analysis{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Top Cross-Sell Rules</h2>
+  <img src="{{ url_for('static', filename=image) }}" alt="Lift Chart" class="img-fluid mb-3 shadow-sm">
+  {% for table in tables %}
+    {{ table|safe }}
+  {% endfor %}
+</div>
+{% endblock %}

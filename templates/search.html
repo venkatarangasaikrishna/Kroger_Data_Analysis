@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <form method="post" class="d-flex mb-4">
+    <input type="text" name="search" class="form-control me-2" placeholder="Enter Household # (e.g., 10)" required>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  {% if msg %}
+    <div class="alert alert-warning">{{ msg }}</div>
+  {% endif %}
+  {% if data %}
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>Household</th><th>Basket</th><th>Date</th><th>Product #</th>
+          <th>Department</th><th>Commodity</th><th>Spend</th><th>Units</th>
+          <th>Store R</th><th>Week</th><th>Year</th>
+          <th>L</th><th>Age</th><th>Marital</th><th>Income</th><th>Homeowner</th><th>Composition</th><th>Size</th><th>Children</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+        <tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #F2F2F2;
+      font-family: "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-register {
+      width: 100%;
+      max-width: 380px;
+      border: none;
+      border-radius: .75rem;
+      box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.1);
+      overflow: hidden;
+      background: #FFF;
+    }
+    .card-header {
+      background-color: #2E4053; /* slate gray */
+      color: #FFF;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+    .card-body {
+      padding: 2rem;
+    }
+    .form-label {
+      font-weight: 500;
+    }
+    .form-control {
+      border-radius: .375rem;
+      border-color: #2E4053;
+    }
+    .form-control:focus {
+      box-shadow: 0 0 0 .2rem rgba(46,64,83,0.25);
+    }
+    .btn-register {
+      background-color: #D39B25; /* amber */
+      border: none;
+      width: 100%;
+      padding: .75rem;
+      font-size: 1rem;
+      border-radius: .375rem;
+      transition: background-color .2s;
+    }
+    .btn-register:hover {
+      background-color: #B07A1D;
+    }
+    .text-link {
+      color: #D39B25;
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .text-link:hover {
+      color: #B07A1D;
+      text-decoration: underline;
+    }
+    .error-msg {
+      color: #C0392B;
+      font-size: .9rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-register">
+    <div class="card-header">
+      Create Account
+    </div>
+    <div class="card-body">
+      <form action="{{ url_for('register') }}" method="post">
+        {% if msg %}
+          <div class="error-msg">{{ msg }}</div>
+        {% endif %}
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input id="email" name="email" type="email" class="form-control"
+                 placeholder="you@example.com" required autofocus>
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input id="username" name="username" type="text" class="form-control"
+                 placeholder="Choose a username" required>
+        </div>
+        <div class="mb-4">
+          <label for="password" class="form-label">Password</label>
+          <input id="password" name="password" type="password" class="form-control"
+                 placeholder="Enter a strong password" required>
+        </div>
+        <button type="submit" class="btn btn-register mb-3">Sign Up</button>
+        <p class="text-center mb-0">
+          Already have an account?
+          <a href="{{ url_for('homepage') }}" class="text-link">Log in here</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Churn Prediction{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Churn Model Results</h2>
+  <img src="{{ url_for('static', filename=image) }}" alt="ROC Curve" class="img-fluid mb-3 shadow-sm">
+  <p><strong>ROC AUC:</strong> {{ roc_auc|round(2) }}</p>
+  <h4>Classification Report</h4>
+  <table class="table table-bordered table-striped table-sm">
+    <thead class="table-dark">
+      <tr><th>Class</th><th>Precision</th><th>Recall</th><th>F1-Score</th><th>Support</th></tr>
+    </thead>
+    <tbody>
+      {% for cls, metrics in report.items() if cls not in ['accuracy','macro avg','weighted avg'] %}
+      <tr>
+        <td>{{ cls }}</td>
+        <td>{{ metrics.precision|round(2) }}</td>
+        <td>{{ metrics.recall|round(2) }}</td>
+        <td>{{ metrics['f1-score']|round(2) }}</td>
+        <td>{{ metrics.support }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
