@@ -1,1 +1,2 @@
+static/files/*.csv filter=lfs diff=lfs merge=lfs -text
 static/files/400_transactions.csv filter=lfs diff=lfs merge=lfs -text
