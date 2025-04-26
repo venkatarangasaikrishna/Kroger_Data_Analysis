@@ -1,17 +1,18 @@
 import os
 import re
 from pathlib import Path
-from flask import Flask, render_template, request, redirect, url_for, session
-# … your existing imports …
-from churn_prediction import compute_churn_model
-from config import ENGINE, CONN_STR
 
-from flask import Flask, request, render_template, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_session import Session
 from dotenv import load_dotenv
-import pyodbc
+
 import pandas as pd
-from flask import Flask, render_template
+import pyodbc
+
+from config import ENGINE, CONN_STR
+from basket_analysis import basket_linear_regression_analysis
+from churn_prediction import compute_churn_model
+
 
 
 # ─── 1) Load config from .env ─────────────────────────────────────────────────
