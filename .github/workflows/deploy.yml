@@ -27,11 +27,27 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Disable Run-From-Package
+        uses: azure/cli@v1
+        with:
+          inlineScript: |
+            az webapp config appsettings set \
+              --name nobelyashapp \
+              --resource-group nobelyashapp-rg \
+              --settings WEBSITE_RUN_FROM_PACKAGE=0
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: nobelyashapp
           slot-name: production
           package: .
-          # ← this is the important bit:
           startup-command: gunicorn app:app --bind=0.0.0.0:$PORT --timeout 600
+
+      - name: Restart Web App
+        uses: azure/cli@v1
+        with:
+          inlineScript: |
+            az webapp restart \
+              --name nobelyashapp \
+              --resource-group yashnobelkrishna_group
