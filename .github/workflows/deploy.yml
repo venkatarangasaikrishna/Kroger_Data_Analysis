@@ -33,4 +33,3 @@ jobs:
           app-name: nobelyashapp
           slot-name: production
           package: .
-          clean: true
