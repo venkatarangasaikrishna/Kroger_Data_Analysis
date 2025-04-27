@@ -9,10 +9,9 @@ from dotenv import load_dotenv
 import pandas as pd
 import pyodbc
 
-from config import CONN_STR
-from basket_analysis import basket_linear_regression_analysis
-from churn_prediction import compute_churn_model
-
+from config import  CONN_STR
+from basket_analysis import analysis_basket
+from churn_prediction import analysis_churn
 
 
 # ─── 1) Load config from .env ─────────────────────────────────────────────────
@@ -39,7 +38,6 @@ def get_conn():
 
 # ─── 2) Flask setup ────────────────────────────────────────────────────────────
 app = Flask(__name__)
-from churn_prediction import compute_churn_model
 app.secret_key = SECRET_KEY
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
@@ -261,21 +259,19 @@ def dashboard():
     # TODO: implement your dashboard queries & visualizations
     return render_template("dashboard.html")
 
-from basket_analysis import basket_linear_regression_analysis
-
-@app.route("/analysis/basket")
-def analysis_basket():
-    r2_score, img = basket_linear_regression_analysis()
+@app.route("/analysis/basket",endpoint="analysis_basket") 
+def basket_view():
+    score, img = analysis_basket()
     return render_template(
         "analysis_basket.html",
-        score=r2_score,
+        score=score,
         image=img
     )
 
 
-@app.route("/analysis/churn")
-def analysis_churn():
-    report, roc_auc, img = compute_churn_model()
+@app.route("/analysis/churn", endpoint="analysis_churn")
+def churn_view():
+    report, roc_auc, img = analysis_churn()
     return render_template(
       "analysis_churn.html",
       report=report,
