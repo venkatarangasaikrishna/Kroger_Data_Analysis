@@ -3,7 +3,18 @@
 {% block content %}
 <div class="container mt-5">
   <h2 class="mb-4">Top Cross-Sell Rules</h2>
-  <img src="{{ url_for('static', filename=image) }}" alt="Lift Chart" class="img-fluid mb-3 shadow-sm">
+
+  {# ←— Guard the <img> so we only call url_for when image is truthy —→ #}
+  {% if image %}
+    <img
+      src="{{ url_for('static', filename=image) }}"
+      alt="Lift Chart"
+      class="img-fluid mb-3 shadow-sm"
+    >
+  {% else %}
+    <p class="text-muted"><em>No plot available</em></p>
+  {% endif %}
+
   {% for table in tables %}
     {{ table|safe }}
   {% endfor %}
