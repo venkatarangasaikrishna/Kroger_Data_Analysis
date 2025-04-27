@@ -33,7 +33,7 @@ jobs:
           inlineScript: |
             az webapp config appsettings set \
               --name nobelyashapp \
-              --resource-group nobelyashapp-rg \
+              --resource-group yashnobelkrishna_group \
               --settings WEBSITE_RUN_FROM_PACKAGE=0
 
       - name: Deploy to Azure Web App
