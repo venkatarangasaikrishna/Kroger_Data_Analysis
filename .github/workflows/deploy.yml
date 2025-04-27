@@ -33,3 +33,5 @@ jobs:
           app-name: nobelyashapp
           slot-name: production
           package: .
+          # ← this is the important bit:
+          startup-command: gunicorn app:app --bind=0.0.0.0:$PORT --timeout 600
