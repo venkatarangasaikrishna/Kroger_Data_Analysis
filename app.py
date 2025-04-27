@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 import pandas as pd
 import pyodbc
 
-from config import ENGINE, CONN_STR
+from config import CONN_STR
 from basket_analysis import basket_linear_regression_analysis
 from churn_prediction import compute_churn_model
 
